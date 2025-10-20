@@ -4,7 +4,7 @@ import br.com.caftech.decorator.Bebida;
 public class CafeGourmet extends Bebida{
     private double precoBase;
 
-    public CafeGourmet(double preco){
+    public CafeGourmet(){
         this.descricao = "Café Gourmet";
         this.precoBase = preco;
     }

@@ -4,7 +4,7 @@ import br.com.caftech.decorator.Bebida;
 public class Cappuccino extends Bebida{
     private double precoBase;
 
-    public Cappuccino(double preco){
+    public Cappuccino(){
         this.descricao = "Cappuccino";
         this.precoBase = preco;
     }
