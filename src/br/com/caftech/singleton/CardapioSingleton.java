@@ -7,19 +7,19 @@ import java.util.Map;
 public class CardapioSingleton {
 
     private static final CardapioSingleton instancia = new CardapioSingleton();
-    private static final String ARQUIVO_CARDAPIO = "cardapio.dat"; //nomde do arq
+    private static final String ARQUIVO_CARDAPIO = "cardapio.dat";
     private Map<String, Double> precosItens;
 
-    private CardapioSingleton() { //(Singleton)
+    private CardapioSingleton() {
         carregarCardapio();
         if (precosItens == null) {
             System.out.println("[Cardapio] Nenhum arquivo encontrado. Criando cardápio padrão...");
             precosItens = new HashMap<>();
         }
-        sincronizarItensPadrao(); // <--- ESTA LINHA DEVE ESTAR DENTRO DO CONSTRUTOR
+        sincronizarItensPadrao();
         salvarCardapio();
     }
-    public static CardapioSingleton getInstancia() { //acesso global
+    public static CardapioSingleton getInstancia() {
         return instancia;
     }
     private void carregarCardapio() {
@@ -41,7 +41,6 @@ public class CardapioSingleton {
         try (FileOutputStream fos = new FileOutputStream(ARQUIVO_CARDAPIO);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 
-            // salva o objeto 'precosItens' (o Mapa) inteiro no arquivo
             oos.writeObject(precosItens);
             System.out.println("[Cardapio] Cardápio padrão salvo em " + ARQUIVO_CARDAPIO);
 
@@ -50,7 +49,6 @@ public class CardapioSingleton {
         }
     }
     private void sincronizarItensPadrao() { //metodo de segurança, primeira inicilizaçao
-        precosItens = new HashMap<>();
 
         precosItens.putIfAbsent("expresso", 7.00);
         precosItens.putIfAbsent("cafe gourmet", 13.00);
@@ -69,7 +67,8 @@ public class CardapioSingleton {
         double preco = precosItens.getOrDefault(chave, 0.0);
 
         if (preco == 0.0){
-            System.err.println("[Cardapio] AVISO: Item '" + chave + "' não encontrado no cardápio.");        }
+            System.err.println("[Cardapio] AVISO: Item '" + chave + "' não encontrado no cardápio.");
+        }
         return preco;
     }
 }

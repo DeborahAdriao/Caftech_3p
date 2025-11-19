@@ -24,7 +24,6 @@ public class CaixaFinanceiroSingleton {
     public static CaixaFinanceiroSingleton getInstancia() {
         return instancia;
     }
-    // --- MÉTODOS DE NEGÓCIO (O que o Menu vai usar) ---
 
     public void listarHistorico() {
         System.out.println("\n--- Histórico de Vendas CafTech ---\n");
@@ -32,7 +31,6 @@ public class CaixaFinanceiroSingleton {
         if (historicoPedidos.isEmpty()) {
             System.out.println(" (Nenhuma venda registrada)");
         } else {
-            // Itera na lista de pedidos e usa o metodo toString() de cada Pedido
             for (Pedido p : historicoPedidos) {
                 System.out.println("  " + p.toString());
             }
@@ -46,7 +44,6 @@ public class CaixaFinanceiroSingleton {
 
         System.out.printf("\n[Caixa] Venda registrada! Novo saldo: R$ %.2f\n", saldoTotal);
     }
-    // --- MÉTODOS INTERNOS (Persistência e Cálculo) ---
 
     private void salvarHistorico() {
         try (FileOutputStream fos = new FileOutputStream(ARQUIVO_PEDIDOS);
@@ -65,7 +62,6 @@ public class CaixaFinanceiroSingleton {
             System.out.println("[Caixa] Histórico de pedidos carregado de " + ARQUIVO_PEDIDOS);
 
         } catch (FileNotFoundException e) {
-            // Isso é normal na primeira vez que o programa roda
             System.out.println("[Caixa] Arquivo " + ARQUIVO_PEDIDOS + " não encontrado. Um novo será criado.");
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("[Caixa] Erro ao carregar histórico: " + e.getMessage());

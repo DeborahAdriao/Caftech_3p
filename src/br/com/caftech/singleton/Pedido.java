@@ -2,7 +2,7 @@ package br.com.caftech.singleton;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-// tive que deixar as classes pedido publicas para poder implementar ele no menu
+
 public class Pedido implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -15,8 +15,6 @@ public class Pedido implements Serializable {
         this.descricaoBebida = descricaoBebida;
         this.metodoPagamento = metodoPagamento;
         this.dataHora = LocalDateTime.now();
-
-        //o calculo de acrescimo agora vai ficar no MENU - fazerNovoPedido
         this.valorTotal = valorTotalFinal;
     }
 

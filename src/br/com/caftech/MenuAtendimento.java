@@ -12,7 +12,6 @@ public class MenuAtendimento {
 
     private Scanner scanner;
     private CafeteriaFactory factory;
-    //inicio do singleton
     private CaixaFinanceiroSingleton caixa;
 
     public MenuAtendimento() {
@@ -20,10 +19,9 @@ public class MenuAtendimento {
         this.caixa = CaixaFinanceiroSingleton.getInstancia();
     }
 
-    //inicio do menu
     public void iniciar() {
         System.out.println("\n---------------------------------");
-        System.out.println("Seja bem vindo a cafeteria CaffeTech");
+        System.out.println("Seja bem vindo a cafeteria CafTech");
         System.out.println("---------------------------------");
 
         boolean executando = true;
@@ -38,11 +36,9 @@ public class MenuAtendimento {
                 int escolha = scanner.nextInt();
                 switch (escolha) {
                     case 1:
-                        // mini menu p criar o pedido
                         fazerNovoPedido();
                         break;
                     case 2:
-                        // vai listar o historico de pedidos
                         caixa.listarHistorico();
                         break;
                     case 0:
@@ -56,38 +52,29 @@ public class MenuAtendimento {
                 scanner.next();
             }
         }
-
         System.out.println("\nSistema encerrado. Obrigado e volte sempre! <3");
         scanner.close();
     }
 
-    // mini menu de criação de pedido
-    //adicionei a parte do acrescimo de 5% aqui
-    //adicionei uma parte de validaçao, pois estava aceitando palavras erraadas (ex: carpao)
     private void fazerNovoPedido() {
         System.out.println("\n--- NOVO PEDIDO ---");
 
-        // escolha da base de bebida com o factory
         Bebida bebidaDoCliente = escolherBebidaBase();
-        // escolha dos acicionais do decorator
         bebidaDoCliente = adicionarExtras(bebidaDoCliente);
-        double valorBase = bebidaDoCliente.getCusto(); //custo base ANTES de adicionar
+        double valorBase = bebidaDoCliente.getCusto();
 
         System.out.println("\n--- Método de Pagamento ---");
-        System.out.printf("(Valor base do pedido: R$ %.2f)\n", valorBase);//troquei para valorBase
+        System.out.printf("(Valor base do pedido: R$ %.2f)\n", valorBase);
         scanner.nextLine();
 
-        //variáveis fora do loop
         String metodoPag;
         double valorFinal;
 
         //LOOP DE VALIDAÇÃO (para evitar "carpao")
         while (true) {
             System.out.print("Digite o método (Ex: Dinheiro, Cartão, Pix): ");
-            //adicionei o .trim() (para tirar os " ") e o .toLowerCase() (para deixar tudo minusculo)
             metodoPag = scanner.nextLine().trim().toLowerCase();
 
-            //verifica as opções válidas
             if (metodoPag.equalsIgnoreCase("cartao") || metodoPag.equalsIgnoreCase("cartão")) {
 
                 //calcula a taxa e dá o aviso
@@ -100,7 +87,7 @@ public class MenuAtendimento {
                 String confirmacao = scanner.nextLine().trim().toLowerCase();
 
                 if (confirmacao.equalsIgnoreCase("s") || confirmacao.equalsIgnoreCase("sim")) {
-                    break; // confirmou, saiu do loop.
+                    break;
                 } else {
                     System.out.println("Pagamento com cartão cancelado. Por favor, escolha outro método.");
                     continue; // Volta para o início do "while(true)"
@@ -108,9 +95,8 @@ public class MenuAtendimento {
             } else if (metodoPag.equalsIgnoreCase("dinheiro") || metodoPag.equalsIgnoreCase("pix")) {
                 // sem taxa
                 valorFinal = valorBase;
-                break; //sai do loop, entrada válida!
+                break;
             } else {
-                //erro, repete o loop
                 System.err.println("Método '" + metodoPag + "' não reconhecido. Por favor, digite Cartão, Dinheiro ou Pix.");
             }
         }
@@ -120,14 +106,13 @@ public class MenuAtendimento {
 
         Pedido novoPedido = new Pedido(
                 bebidaDoCliente.getDescricao(),
-                valorFinal, // de bebidaDoCliente.getCusto() foi para valorFinal
+                valorFinal,
                 metodoPag
         );
         // registro do novo pedido e já lança o saldo atualizado no caixa
         caixa.registrarPedido(novoPedido);
     }
 
-    // escolha da base de bebida
     private Bebida escolherBebidaBase() {
         System.out.println("\n--- Por favor escolha sua Bebida Base! ---");
         System.out.println("1: Café Expresso");
@@ -161,7 +146,7 @@ public class MenuAtendimento {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Ainda não entendi... Por favor digite os números válidos.");
-                scanner.next(); // trata erro caso digite string ao invés de escolher num
+                scanner.next();
             }
         }
     }
