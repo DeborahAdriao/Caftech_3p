@@ -1,6 +1,6 @@
 package br.com.caftech.factory;
-import br.com.caftech.decorator.Bebida;
+import br.com.caftech.decorator.BebidaAbstrata;
 
 public abstract class  CafeteriaFactory {
-    public abstract Bebida criarBebida();
+    public abstract BebidaAbstrata criarBebida();
 }

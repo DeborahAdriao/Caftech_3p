@@ -1,7 +1,7 @@
 package br.com.caftech.decorator.bebidas;
-import br.com.caftech.decorator.Bebida;
+import br.com.caftech.decorator.BebidaAbstrata;
 
-public class Latte extends Bebida{
+public class Latte extends BebidaAbstrata {
     private double precoBase;
 
     public Latte(double preco){

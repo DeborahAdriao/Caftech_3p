@@ -1,6 +1,6 @@
 package br.com.caftech;
 
-import br.com.caftech.decorator.Bebida;
+import br.com.caftech.decorator.BebidaAbstrata;
 import br.com.caftech.decorator.adicionais.*;
 import br.com.caftech.factory.*;
 import br.com.caftech.singleton.CaixaFinanceiroSingleton;
@@ -59,7 +59,7 @@ public class MenuAtendimento {
     private void fazerNovoPedido() {
         System.out.println("\n--- NOVO PEDIDO ---");
 
-        Bebida bebidaDoCliente = escolherBebidaBase();
+        BebidaAbstrata bebidaDoCliente = escolherBebidaBase();
         bebidaDoCliente = adicionarExtras(bebidaDoCliente);
         double valorBase = bebidaDoCliente.getCusto();
 
@@ -113,7 +113,7 @@ public class MenuAtendimento {
         caixa.registrarPedido(novoPedido);
     }
 
-    private Bebida escolherBebidaBase() {
+    private BebidaAbstrata escolherBebidaBase() {
         System.out.println("\n--- Por favor escolha sua Bebida Base! ---");
         System.out.println("1: Café Expresso");
         System.out.println("2: Cappuccino");
@@ -151,8 +151,8 @@ public class MenuAtendimento {
         }
     }
 
-    private Bebida adicionarExtras(Bebida bebidaBase) {
-        Bebida bebidaAtual = bebidaBase;
+    private BebidaAbstrata adicionarExtras(BebidaAbstrata bebidaBase) {
+        BebidaAbstrata bebidaAtual = bebidaBase;
         System.out.println("\nQuer deixar seu pedido mais saboroso? Escolha algum adicional!");
         System.out.println("-> Caso esteja satisfeito digite 0");
         while (true) {

@@ -1,11 +1,11 @@
 package br.com.caftech.decorator.adicionais;
-import br.com.caftech.decorator.Bebida;
+import br.com.caftech.decorator.BebidaAbstrata;
 import br.com.caftech.singleton.CardapioSingleton;
 
 public class Chocolate extends AdicionalDecorator{
     private double precoAdicional;
 
-    public Chocolate (Bebida bebida){
+    public Chocolate (BebidaAbstrata bebida){
         super(bebida);
         this.precoAdicional = CardapioSingleton.getInstancia().getPrecoItem("chocolate");
     }
