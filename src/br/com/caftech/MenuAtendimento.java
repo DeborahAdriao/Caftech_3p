@@ -104,7 +104,8 @@ public class MenuAtendimento {
                 } else {
                     System.out.println("Pagamento com cartão cancelado. Por favor, escolha outro método.");
                     continue; // Volta para o início do "while(true)"
-                }            } else if (metodoPag.equalsIgnoreCase("dinheiro") || metodoPag.equalsIgnoreCase("pix")) {
+                }
+            } else if (metodoPag.equalsIgnoreCase("dinheiro") || metodoPag.equalsIgnoreCase("pix")) {
                 // sem taxa
                 valorFinal = valorBase;
                 break; //sai do loop, entrada válida!
@@ -133,6 +134,7 @@ public class MenuAtendimento {
         System.out.println("2: Cappuccino");
         System.out.println("3: Latte");
         System.out.println("4. Café Gourmet");
+        System.out.println("5. Mocha");
 
         while (true) {
             System.out.print("\nDigite a opção (1-4): ");
@@ -150,6 +152,9 @@ public class MenuAtendimento {
                         return factory.criarBebida();
                     case 4:
                         this.factory = new CafeGourmetFactory();
+                        return factory.criarBebida();
+                    case 5:
+                        this.factory = new MochaFactory();
                         return factory.criarBebida();
                     default:
                         System.out.println("Não entendi... por favor digite uma opção válida");

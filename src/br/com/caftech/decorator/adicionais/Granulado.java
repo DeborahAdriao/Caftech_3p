@@ -11,7 +11,7 @@ public class Granulado extends AdicionalDecorator{
     }
     @Override
     public String getDescricao(){
-        return bebida.getDescricao() + ", Granulado";
+        return bebida.getDescricao() + ", com Granulado";
     }
     @Override
     public double getCusto(){
