@@ -14,10 +14,10 @@ public class CardapioSingleton {
         carregarCardapio();
         if (precosItens == null) {
             System.out.println("[Cardapio] Nenhum arquivo encontrado. Criando cardápio padrão...");
-            criarCardapioPadrao();
-            // E salva esse cardápio padrão no arquivo
-            salvarCardapio();
+            precosItens = new HashMap<>();
         }
+        sincronizarItensPadrao(); // <--- ESTA LINHA DEVE ESTAR DENTRO DO CONSTRUTOR
+        salvarCardapio();
     }
     public static CardapioSingleton getInstancia() { //acesso global
         return instancia;
@@ -49,18 +49,19 @@ public class CardapioSingleton {
             System.err.println("[Cardapio] Erro ao salvar cardápio: " + e.getMessage());
         }
     }
-    private void criarCardapioPadrao() { //metodo de segurança, primeira inicilizaçao
+    private void sincronizarItensPadrao() { //metodo de segurança, primeira inicilizaçao
         precosItens = new HashMap<>();
 
-        precosItens.put("expresso", 7.00);
-        precosItens.put("cafe gourmet", 13.00);
-        precosItens.put("cappuccino", 9.00);
-        precosItens.put("latte", 7.00);
+        precosItens.putIfAbsent("expresso", 7.00);
+        precosItens.putIfAbsent("cafe gourmet", 13.00);
+        precosItens.putIfAbsent("cappuccino", 9.00);
+        precosItens.putIfAbsent("latte", 7.00);
 
-        precosItens.put("baunilha", 0.50);
-        precosItens.put("chocolate", 2.00);
-        precosItens.put("chantily", 2.00);
-        precosItens.put("canela", 0.50);
+        precosItens.putIfAbsent("baunilha", 0.50);
+        precosItens.putIfAbsent("chocolate", 2.00);
+        precosItens.putIfAbsent("chantily", 2.00);
+        precosItens.putIfAbsent("canela", 0.50);
+        precosItens.putIfAbsent("granulado", 0.70);
     }
     public double getPrecoItem(String nomeItem){ //metodo q o resto pode acessar
         String chave = nomeItem.toLowerCase().trim();

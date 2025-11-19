@@ -173,8 +173,9 @@ public class MenuAtendimento {
             System.out.println("2: Canela");
             System.out.println("3: Chantily");
             System.out.println("4: Chocolate");
+            System.out.println("5: Granulado");
             System.out.println("0: Sair / Finalizar Pedido");
-            System.out.print("\nDigite a opção (0-4): ");
+            System.out.print("\nDigite a opção (0-5): ");
 
             try {
                 int escolha = scanner.nextInt();
@@ -194,6 +195,10 @@ public class MenuAtendimento {
                     case 4:
                         bebidaAtual = new Chocolate(bebidaAtual);
                         System.out.println("Chocolate adicionado!");
+                        break;
+                    case 5:
+                        bebidaAtual = new Granulado(bebidaAtual);
+                        System.out.println("Granulado adicionado!");
                         break;
                     case 0:
                         return bebidaAtual;
